@@ -10,11 +10,11 @@ public class Program {
     private static char[][] playingField;
     private static final Scanner scanner = new Scanner(System.in);
     private static final Random rnd = new Random();
-
     private static final char EMPTY_FIELD = '_';
     private static final char SIGN_OF_THE_CROSS = 'X';
     private static final char ZERO_SIGN = 'O';
     private static boolean resultLottery;
+    private static int winningCombination;
 
     public static void main(String[] args) {
         fillPlayingField();
@@ -28,13 +28,27 @@ public class Program {
             if (resultLottery) {
                 playerMove();
                 printPlayingField();
+                if (checkWin()) {
+                    System.out.println("Конец игры!");
+                }
+
                 botMove();
                 printPlayingField();
+                if (checkWin()) {
+                    System.out.println("Конец игры!");
+                }
             } else {
                 botMove();
                 printPlayingField();
+                if (checkWin()) {
+                    System.out.println("Конец игры!");
+                }
+
                 playerMove();
                 printPlayingField();
+                if (checkWin()) {
+                    System.out.println("Конец игры!");
+                }
             }
 
         }
@@ -43,10 +57,16 @@ public class Program {
 
     private static void fillPlayingField() {
         System.out.print("Введите размер поля через пробел: ");
-//        lines = scanner.nextInt();
-//        columns = scanner.nextInt();
-        lines = 5;
-        columns =5;
+        lines = scanner.nextInt();
+        columns = scanner.nextInt();
+//        lines = 5;
+//        columns =5;
+
+        System.out.print("Укажите победное количество клеток: ");
+        winningCombination = scanner.nextInt();
+        System.out.printf(
+                "Отлично! Для того, чтобы победить нужно чтобы один знак " +
+                "стоял на %d клеточках друг за другом", winningCombination);
 
         playingField = new char[lines][columns];
 
@@ -111,16 +131,86 @@ public class Program {
     }
 
     private static void botMove() {
-        int x, y;
-        do {
-            x = rnd.nextInt(lines);
-            y = rnd.nextInt(columns);
-        } while (!isEmptyField(x,y) || !isCorrectCoordinate(x,y));
+
+        int x = -1; // Исходное значение координат
+        int y = -1;
+
+        String string = checkStateGameForBot();
+
+        if (!string.equals("0")) {
+            String[] s = string.split(",");
+            x = Integer.parseInt(s[0]);
+            y = Integer.parseInt(s[1]);
+        }
+
+        if (x == -1 || !isEmptyField(x, y) || !isCorrectCoordinate(x, y)) {
+            // Если координаты не заданы или некорректны, или ячейка не пуста,
+            // то генерируем случайные координаты
+            do {
+                x = rnd.nextInt(lines);
+                y = rnd.nextInt(columns);
+            } while (!isEmptyField(x, y) || !isCorrectCoordinate(x, y));
+        }
+
+        // Выполняем ход бота
         if (!resultLottery) {
             playingField[x][y] = SIGN_OF_THE_CROSS;
         } else {
             playingField[x][y] = ZERO_SIGN;
         }
+
+
+
+
+//        String string = checkStateGameForBot();
+//
+//        int x;
+//        int y;
+//
+//        do {
+//            if (!string.equals("0")) {
+//                String[] s = string.split(",");
+//                x = Integer.parseInt(s[0]);
+//                y = Integer.parseInt(s[1]);
+//            }
+//
+//            x = rnd.nextInt(lines);
+//            y = rnd.nextInt(columns);
+//
+//        } while (!isEmptyField(x,y) || !isCorrectCoordinate(x,y));
+//        if (!resultLottery) {
+//            playingField[x][y] = SIGN_OF_THE_CROSS;
+//        } else {
+//            playingField[x][y] = ZERO_SIGN;
+//        }
+
+
+
+
+//        int x, y;
+//        do {
+//            x = rnd.nextInt(lines);
+//            y = rnd.nextInt(columns);
+//        } while (!isEmptyField(x,y) || !isCorrectCoordinate(x,y));
+//        if (!resultLottery) {
+//            playingField[x][y] = SIGN_OF_THE_CROSS;
+//        } else {
+//            playingField[x][y] = ZERO_SIGN;
+//        }
+    }
+
+    private static String checkStateGameForBot() {
+        String string = "";
+        int size = playingField.length;
+
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - 1; j++) {
+                if (playingField[i][j] != EMPTY_FIELD && playingField[i][j] == playingField[i][j + 1] && playingField[i][j] == playingField[i][j + 2]){
+                    return string + i + "," + (j + 3);
+                }
+            }
+        }
+        return string + "0";
     }
 
     private static boolean isCorrectCoordinate(int x, int y) {
@@ -163,6 +253,44 @@ public class Program {
                 return false;
             }
         }
+    }
+
+    private static boolean checkWin() {
+
+        // проверка по горизонтали
+        int size = playingField.length;
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - 1; j++) {
+                if (playingField[i][j] != EMPTY_FIELD &&
+                                playingField[i][j] == playingField[i][j + 1] &&
+                                playingField[i][j] == playingField[i][j + 2]){
+                    return true;
+                }
+            }
+        }
+
+        //  проверка по вертикали
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - 1; j++) {
+                if (playingField[i][j] != EMPTY_FIELD &&
+                                playingField[i][j] == playingField[i + 1][j] &&
+                                playingField[i][j] == playingField[i + 2][j]){
+                    return true;
+                }
+            }
+        }
+
+        // проверка по диагонали
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - 1; j++) {
+                if (playingField[i][j] != EMPTY_FIELD &&
+                                playingField[i][j] == playingField[i+1][j+1] &&
+                                playingField[i][j] == playingField[i+2][j+2]){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
