@@ -14,13 +14,14 @@ public class Program {
     private static final char EMPTY_FIELD = '_';
     private static final char SIGN_OF_THE_CROSS = 'X';
     private static final char ZERO_SIGN = 'O';
+    private static boolean resultLottery;
 
     public static void main(String[] args) {
         fillPlayingField();
         printPlayingField();
         System.out.println();
 
-        boolean resultLottery = lottery();
+        resultLottery = lottery();
         System.out.println();
 
         while (true) {
@@ -101,7 +102,12 @@ public class Program {
         System.out.print("Укажите координату по вертикали и по горизонтали через пробел: ");
         int x = scanner.nextInt() - 1;
         int y = scanner.nextInt() - 1;
-        playingField[x][y] = SIGN_OF_THE_CROSS;
+
+        if (resultLottery) {
+            playingField[x][y] = SIGN_OF_THE_CROSS;
+        } else {
+            playingField[x][y] = ZERO_SIGN;
+        }
     }
 
     private static void botMove() {
@@ -110,7 +116,11 @@ public class Program {
             x = rnd.nextInt(lines);
             y = rnd.nextInt(columns);
         } while (!isEmptyField(x,y) || !isCorrectCoordinate(x,y));
-        playingField[x][y] = ZERO_SIGN;
+        if (!resultLottery) {
+            playingField[x][y] = SIGN_OF_THE_CROSS;
+        } else {
+            playingField[x][y] = ZERO_SIGN;
+        }
     }
 
     private static boolean isCorrectCoordinate(int x, int y) {
@@ -137,19 +147,19 @@ public class Program {
         if (result == 1) {
             System.out.println("Выпал орел!");
             if (choice == result) {
-                System.out.println("За вами первый ход!");
+                System.out.println("За вами первый ход! Вы играете X");
                 return true;
             } else {
-                System.out.println("Первым ходит компьютер!");
+                System.out.println("Первым ходит компьютер! Вы играете 0");
                 return false;
             }
         } else {
             System.out.println("Выпала решка!");
             if (choice == result) {
-                System.out.println("За вами первый ход!");
+                System.out.println("За вами первый ход! Вы играете X");
                 return true;
             } else {
-                System.out.println("Первым ходит компьютер!");
+                System.out.println("Первым ходит компьютер! Вы играете 0");
                 return false;
             }
         }
