@@ -18,9 +18,24 @@ public class Program {
     public static void main(String[] args) {
         fillPlayingField();
         printPlayingField();
+        System.out.println();
+
+        boolean resultLottery = lottery();
+        System.out.println();
+
         while (true) {
-            playerMove();
-            printPlayingField();
+            if (resultLottery) {
+                playerMove();
+                printPlayingField();
+                botMove();
+                printPlayingField();
+            } else {
+                botMove();
+                printPlayingField();
+                playerMove();
+                printPlayingField();
+            }
+
         }
 
     }
@@ -73,14 +88,71 @@ public class Program {
             System.out.println();
         }
         for (int i = 0; i < columns + 2; i++) {
-            System.out.print("* ");
+            if (i == firstDig || i == lastDig + 2) {
+                System.out.print("* ");
+            } else {
+                System.out.print(i + " ");
+            }
         }
         System.out.println();
     }
 
     private static void playerMove() {
-        int x = scanner.nextInt();
-        int y = scanner.nextInt();
+        System.out.print("Укажите координату по вертикали и по горизонтали через пробел: ");
+        int x = scanner.nextInt() - 1;
+        int y = scanner.nextInt() - 1;
         playingField[x][y] = SIGN_OF_THE_CROSS;
     }
+
+    private static void botMove() {
+        int x, y;
+        do {
+            x = rnd.nextInt(lines);
+            y = rnd.nextInt(columns);
+        } while (!isEmptyField(x,y) || !isCorrectCoordinate(x,y));
+        playingField[x][y] = ZERO_SIGN;
+    }
+
+    private static boolean isCorrectCoordinate(int x, int y) {
+        return x >= 0 && x < lines && y >= 0 && y < columns;
+    }
+
+    private static boolean isEmptyField(int x, int y) {
+        return playingField[x][y] == EMPTY_FIELD;
+    }
+
+    private static boolean lottery() {
+
+        String text = """
+                    Сейчас будет разыгранно первеснтво хода.
+                    1 - это орел, 2 - это решка
+                    """;
+        System.out.print(text);
+        System.out.println();
+
+        System.out.print("Киньте монетку: ");
+        int choice = scanner.nextInt();
+        int result = rnd.nextInt(3);
+
+        if (result == 1) {
+            System.out.println("Выпал орел!");
+            if (choice == result) {
+                System.out.println("За вами первый ход!");
+                return true;
+            } else {
+                System.out.println("Первым ходит компьютер!");
+                return false;
+            }
+        } else {
+            System.out.println("Выпала решка!");
+            if (choice == result) {
+                System.out.println("За вами первый ход!");
+                return true;
+            } else {
+                System.out.println("Первым ходит компьютер!");
+                return false;
+            }
+        }
+    }
+
 }
