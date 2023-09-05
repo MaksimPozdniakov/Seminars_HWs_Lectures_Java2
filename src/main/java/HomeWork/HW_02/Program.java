@@ -148,15 +148,12 @@ public class Program {
         }
 
         if (x == -1) {
-            // Если координаты не заданы или некорректны, или ячейка не пуста,
-            // то генерируем случайные координаты
             do {
                 x = rnd.nextInt(lines);
                 y = rnd.nextInt(columns);
             } while (!isEmptyField(x, y) || !isCorrectCoordinate(x, y));
         }
 
-        // Выполняем ход бота
         if (!resultLottery) {
             playingField[x][y] = SIGN_OF_THE_CROSS;
         } else {
