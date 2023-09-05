@@ -14,9 +14,9 @@ public class Program {
     private static final char SIGN_OF_THE_CROSS = 'X';
     private static final char ZERO_SIGN = 'O';
     private static boolean resultLottery;
-    private static int winningCombination;
 
     public static void main(String[] args) {
+
         fillPlayingField();
         printPlayingField();
         System.out.println();
@@ -26,29 +26,41 @@ public class Program {
 
         while (true) {
             if (resultLottery) {
+                System.out.println("Ваш ход!");
                 playerMove();
                 printPlayingField();
                 if (checkWin()) {
-                    System.out.println("Конец игры!");
+                    System.out.println("Конец игры! Вы победили!");
+                    break;
                 }
 
+                System.out.println();
+                System.out.println("Ход компьютера!");
                 botMove();
                 printPlayingField();
                 if (checkWin()) {
-                    System.out.println("Конец игры!");
+                    System.out.println("Конец игры! Победил компьютер!");
+                    break;
                 }
+                System.out.println();
             } else {
+                System.out.println("Ход компьютера!");
                 botMove();
                 printPlayingField();
                 if (checkWin()) {
-                    System.out.println("Конец игры!");
+                    System.out.println("Конец игры! Победил компьютер!");
+                    break;
                 }
 
+                System.out.println();
+                System.out.println("Ваш ход!");
                 playerMove();
                 printPlayingField();
                 if (checkWin()) {
-                    System.out.println("Конец игры!");
+                    System.out.println("Конец игры! Вы победили!");
+                    break;
                 }
+                System.out.println();
             }
 
         }
@@ -59,14 +71,6 @@ public class Program {
         System.out.print("Введите размер поля через пробел: ");
         lines = scanner.nextInt();
         columns = scanner.nextInt();
-//        lines = 5;
-//        columns =5;
-
-        System.out.print("Укажите победное количество клеток: ");
-        winningCombination = scanner.nextInt();
-        System.out.printf(
-                "Отлично! Для того, чтобы победить нужно чтобы один знак " +
-                "стоял на %d клеточках друг за другом", winningCombination);
 
         playingField = new char[lines][columns];
 
@@ -133,7 +137,7 @@ public class Program {
     private static void botMove() {
 
         int x = -1; // Исходное значение координат
-        int y = -1;
+        int y = -1; // Исходное значение координат
 
         String string = checkStateGameForBot();
 
@@ -143,7 +147,7 @@ public class Program {
             y = Integer.parseInt(s[1]);
         }
 
-        if (x == -1 || !isEmptyField(x, y) || !isCorrectCoordinate(x, y)) {
+        if (x == -1) {
             // Если координаты не заданы или некорректны, или ячейка не пуста,
             // то генерируем случайные координаты
             do {
@@ -158,59 +162,64 @@ public class Program {
         } else {
             playingField[x][y] = ZERO_SIGN;
         }
-
-
-
-
-//        String string = checkStateGameForBot();
-//
-//        int x;
-//        int y;
-//
-//        do {
-//            if (!string.equals("0")) {
-//                String[] s = string.split(",");
-//                x = Integer.parseInt(s[0]);
-//                y = Integer.parseInt(s[1]);
-//            }
-//
-//            x = rnd.nextInt(lines);
-//            y = rnd.nextInt(columns);
-//
-//        } while (!isEmptyField(x,y) || !isCorrectCoordinate(x,y));
-//        if (!resultLottery) {
-//            playingField[x][y] = SIGN_OF_THE_CROSS;
-//        } else {
-//            playingField[x][y] = ZERO_SIGN;
-//        }
-
-
-
-
-//        int x, y;
-//        do {
-//            x = rnd.nextInt(lines);
-//            y = rnd.nextInt(columns);
-//        } while (!isEmptyField(x,y) || !isCorrectCoordinate(x,y));
-//        if (!resultLottery) {
-//            playingField[x][y] = SIGN_OF_THE_CROSS;
-//        } else {
-//            playingField[x][y] = ZERO_SIGN;
-//        }
     }
 
     private static String checkStateGameForBot() {
-        String string = "";
+
         int size = playingField.length;
 
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - 1; j++) {
-                if (playingField[i][j] != EMPTY_FIELD && playingField[i][j] == playingField[i][j + 1] && playingField[i][j] == playingField[i][j + 2]){
-                    return string + i + "," + (j + 3);
+        // Делаем проверку по горизонтали
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (j < size - 2 && playingField[i][j] != EMPTY_FIELD &&
+                        playingField[i][j] == playingField[i][j + 1]) {
+                    if (isEmptyField(i, j + 2)) {
+                        return i + "," + (j + 2); // Если доступен ход j + 2, то возвращаем его
+                    }
+                } else if (j >= 2 && playingField[i][j] != EMPTY_FIELD &&
+                        playingField[i][j] == playingField[i][j - 1]) {
+                    if (isEmptyField(i, j - 2)) {
+                        return i + "," + (j - 2); // Если ход j + 2 сделать невозможно, идем назад
+                    }
                 }
             }
         }
-        return string + "0";
+
+        // Делаем проверку по вертикали
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (i < size - 2 && playingField[i][j] != EMPTY_FIELD &&
+                        playingField[i][j] == playingField[i + 1][j]) {
+                    if (isEmptyField(i + 2, j)) {
+                        return i + 2 + "," + j;
+                    }
+                } else if (i >= 2 && playingField[i][j] != EMPTY_FIELD &&
+                        playingField[i][j] == playingField[i - 1][j]) {
+                    if (isEmptyField(i - 2, j)) {
+                        return (i - 2) + "," + j;
+                    }
+                }
+            }
+        }
+
+        // Делаем проверку по диагонали
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (j < size - 2 && i < size - 2 && playingField[i][j] != EMPTY_FIELD &&
+                        playingField[i][j] == playingField[i+ 1][j + 1]) {
+                    if (isEmptyField(i + 2, j + 2)) {
+                        return (i + 2) + "," + (j + 2);
+                    }
+                } else if (j >= 2 && i >= 2 && playingField[i][j] != EMPTY_FIELD &&
+                        playingField[i][j] == playingField[i - 1][j - 1]) {
+                    if (isEmptyField(i - 2, j - 2)) {
+                        return (i - 2) + "," + (j - 2);
+                    }
+                }
+            }
+        }
+
+        return "0";
     }
 
     private static boolean isCorrectCoordinate(int x, int y) {
@@ -259,8 +268,8 @@ public class Program {
 
         // проверка по горизонтали
         int size = playingField.length;
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - 1; j++) {
+        for (int i = 0; i < size - 2; i++) {
+            for (int j = 0; j < size - 2; j++) {
                 if (playingField[i][j] != EMPTY_FIELD &&
                                 playingField[i][j] == playingField[i][j + 1] &&
                                 playingField[i][j] == playingField[i][j + 2]){
@@ -270,8 +279,8 @@ public class Program {
         }
 
         //  проверка по вертикали
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - 1; j++) {
+        for (int i = 0; i < size - 2; i++) {
+            for (int j = 0; j < size - 2; j++) {
                 if (playingField[i][j] != EMPTY_FIELD &&
                                 playingField[i][j] == playingField[i + 1][j] &&
                                 playingField[i][j] == playingField[i + 2][j]){
@@ -281,8 +290,8 @@ public class Program {
         }
 
         // проверка по диагонали
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - 1; j++) {
+        for (int i = 0; i < size - 2; i++) {
+            for (int j = 0; j < size - 2; j++) {
                 if (playingField[i][j] != EMPTY_FIELD &&
                                 playingField[i][j] == playingField[i+1][j+1] &&
                                 playingField[i][j] == playingField[i+2][j+2]){
