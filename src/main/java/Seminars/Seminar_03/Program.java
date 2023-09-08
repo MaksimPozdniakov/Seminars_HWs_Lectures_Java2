@@ -13,12 +13,23 @@ public class Program {
             System.out.println(employee);
         }
 
-        Collections.sort(employees, new EmployeeNameComparator());
+        System.out.println();
+        System.out.print("Отсортированный список по зарплате");
+//        Collections.sort(employees, new EmployeeNameComparator());
+        Collections.sort(employees);
         System.out.println();
 
         for (Employee employee: employees) {
             System.out.println(employee);
         }
+
+        System.out.println();
+        System.out.print("Отсортированный список по Фамилии");
+        Collections.sort(employees, new EmployeeNameComparator());
+        for (Employee it: employees) {
+            System.out.println(it);
+        }
+
 
     }
 

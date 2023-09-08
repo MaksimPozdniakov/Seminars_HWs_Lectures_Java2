@@ -10,7 +10,7 @@ public abstract class Employee implements Comparable<Employee> {
      * Расчет среднемесячной заработной платы
      * @return
      */
-    public abstract double calculateSalary();
+    public abstract double calculateSalary();   //   ЗАЧЕМ НАМ ЭТОТ МЕТОД?
 
     @Override
     public int compareTo(Employee o) {
