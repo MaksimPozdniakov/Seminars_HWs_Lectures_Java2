@@ -5,14 +5,17 @@ import java.util.Random;
 
 public class Program {
 
-    private static final Constructor constructor = new Constructor(4,4);
+    private static final Constructor constructor = new Constructor(5,4);
 
     public static void main(String[] args) throws MyArraySizeException,MyArrayDataException {
+        System.out.println("Задание №1 и №2");
+
         String[][] stringArray = constructor.getStringArray();
         constructor.print(stringArray);
         System.out.println("Сумма элементов нашего массива = " + constructor.sum(stringArray));
 
         System.out.println();
+        System.out.println("Задание №3");
 
         String[][] stringArray2 = changeItemArray();
 
