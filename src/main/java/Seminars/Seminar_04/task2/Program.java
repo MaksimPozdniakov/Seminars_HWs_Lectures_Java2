@@ -1,7 +1,5 @@
 package Seminars.Seminar_04.task2;
 
-
-import javax.imageio.IIOException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -30,11 +28,6 @@ public class Program {
     public static void main(String[] args) {
         prepareFile();
         loadFile();
-    }
-
-    private static void doProcess() throws Exception {
-        if (random.nextInt(2) == 0)
-            throw new Exception("ERROR!");
     }
 
     private static int parseInt(String key, String value) throws IncorrectSymbolException {
@@ -88,7 +81,6 @@ public class Program {
             fileWriter.write("Анна=4\n");
             fileWriter.write("Елена=5\n");
             fileWriter.write("Марина=6\n");
-            //doProcess();
             fileWriter.write("Владимир=?\n");
             fileWriter.write("Константин=?\n");
             fileWriter.write("Иван=4\n");
