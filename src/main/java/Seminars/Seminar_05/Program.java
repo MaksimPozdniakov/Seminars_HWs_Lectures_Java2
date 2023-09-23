@@ -73,7 +73,7 @@ public class Program {
     private static String generateSymbols(int count){
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < count; i++){
-            stringBuilder.append((char) random.nextInt(CHAR_BOUND_L, CHAR_BOUND_H + 1));
+            stringBuilder.append((char) random.nextInt(CHAR_BOUND_H + 1) + CHAR_BOUND_L);
         }
         return stringBuilder.toString();
     }
