@@ -1,21 +1,24 @@
 package HomeWork.HW_05;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 public class ScanAndClone {
     public static void main(String[] args) {
         showTree(new File("src"), "", true);
 
-        File backupDirectory = new File("./backup");
         File sourceDirectory = new File("src");
+        File backupDirectory = new File("./backup");
         if (!backupDirectory.exists()) {
             backupDirectory.mkdir();
         }
 
+        System.out.println();
+
         ScanAndCloneDir(sourceDirectory, backupDirectory);
+        System.out.println("Резервная копия создана!");
 
 
     }
@@ -64,21 +67,27 @@ public class ScanAndClone {
 
         if (files != null) {
             for (int i = 0; i < files.length; i++) {
-                if (sourceDirectory.isDirectory()) {
+                if (files[i].isDirectory()) {
                     File newBackupDir = new File(backupDirectory, files[i].getName());
                     newBackupDir.mkdir();
                     ScanAndCloneDir(files[i], newBackupDir);
                 } else {
                     File backupFile = new File(backupDirectory, files[i].getName());
                     try {
-                        Files.copy(files[i].toPath(), backupFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                        System.out.println("Создана резервная копия: " + files[i].getAbsolutePath());
+                        copyFile(files[i], backupFile);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
-
     }
+
+    // метод копирования содержимого одного файла (source) в другой (dest) с заменой
+    private static void copyFile(File source, File dest) throws IOException {
+        Path sourcePath = source.toPath();
+        Path destPath = dest.toPath();
+        Files.copy(sourcePath, destPath, StandardCopyOption.REPLACE_EXISTING);
+    }
+
 }
