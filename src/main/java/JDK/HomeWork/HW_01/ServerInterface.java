@@ -1,7 +1,6 @@
 package JDK.HomeWork.HW_01;
 
 import JDK.HomeWork.HW_01.ReadWrite.ReadFromFile;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -74,18 +73,18 @@ public class ServerInterface extends JFrame {
 
     public void printMessage(String string) {
         if (flag) {
-            stringBuilder.append(string);
-            stringBuilder.append("\n");
-            jTextArea.setText(stringBuilder.toString());
+            jTextArea.append(string + "\n");
         }
     }
 
     public void printStoryDialog() throws FileNotFoundException {
+        storyDialogs.clear(); // Очищаем список storyDialogs перед чтением из файла
         readFromFile.read(storyDialogs);
+
+        jTextArea.setText("");
+
         for (String storyDialog : storyDialogs) {
-            stringBuilder.append(storyDialog);
-            stringBuilder.append("\n");
+            jTextArea.append(storyDialog + "\n"); // Добавляем каждый диалог в текстовое поле
         }
-        jTextArea.setText(stringBuilder.toString());
     }
 }
