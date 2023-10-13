@@ -1,6 +1,7 @@
-package JDK.HomeWork.HW_01;
+package JDK.HomeWork.HW_01v2;
 
 import JDK.HomeWork.HW_01.ReadWrite.ReadFromFile;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class ServerInterface extends JFrame {
-
     private static final int WIDTH = 555;
     private static final int HEIGHT = 555;
     private JButton jbStart, jbStop;
@@ -33,18 +33,17 @@ public class ServerInterface extends JFrame {
         add(jTextArea);
         add(mainMenu, BorderLayout.SOUTH);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Установка операции закрытия по умолчанию при закрытии окна
-        setSize(WIDTH, HEIGHT); // Установка размеров окна
-        setLocationRelativeTo(null); // Установка положения окна по центру
-        setTitle("Server Interface"); // Установка заголовка окна
-        setResizable(false); // Запрет изменения размера окна
-        setVisible(true); // Установка видимости окна
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(WIDTH, HEIGHT);
+        setLocationRelativeTo(null);
+        setTitle("Server Interface");
+        setResizable(false);
+        setVisible(true);
 
         addListenerOnButton();
     }
 
     private void addListenerOnButton() {
-
         jbStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,13 +76,27 @@ public class ServerInterface extends JFrame {
     }
 
     public void printStoryDialog() throws FileNotFoundException {
-        storyDialogs.clear(); // Очищаем список storyDialogs перед чтением из файла
+        storyDialogs.clear();
         readFromFile.read(storyDialogs);
 
         jTextArea.setText("");
 
         for (String storyDialog : storyDialogs) {
-            jTextArea.append(storyDialog + "\n"); // Добавляем каждый диалог в текстовое поле
+            jTextArea.append(storyDialog + "\n");
         }
     }
+
+    // этот метод заменяет класс Main
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            ServerInterface server = new ServerInterface();
+//            // Создаем клиентов и передаем им ссылку на сервер
+//            ClientInterface client1 = new ClientInterface(server);
+//            ClientInterface client2 = new ClientInterface(server);
+//
+//            // Открываем окна клиентов
+//            client1.setVisible(true);
+//            client2.setVisible(true);
+//        });
+//    }
 }

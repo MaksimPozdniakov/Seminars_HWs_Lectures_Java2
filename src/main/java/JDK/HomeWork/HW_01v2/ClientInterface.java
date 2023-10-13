@@ -1,7 +1,8 @@
-package JDK.HomeWork.HW_01;
+package JDK.HomeWork.HW_01v2;
 
 import JDK.HomeWork.HW_01.ReadWrite.ReadFromFile;
 import JDK.HomeWork.HW_01.ReadWrite.WriteToFile;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,7 @@ public class ClientInterface extends JFrame {
     private static final int WIDTH = 555;
     private static final int HEIGHT = 555;
 
-    private final ServerInterface serverInterface = new ServerInterface();
+    private ServerInterface server;
     private static ArrayList<String> storyDialogs = new ArrayList<>();
 
     private WriteToFile writeToFile = new WriteToFile(
@@ -31,22 +32,19 @@ public class ClientInterface extends JFrame {
     private String ip;
     private String port;
 
-    ClientInterface() {
-        jpDown = new JPanel(new BorderLayout()); // Создаем панель с BorderLayout
+    public ClientInterface(ServerInterface server) {
+        this.server = server;
+
+        jpDown = new JPanel(new BorderLayout());
         textFieldMessage = new JTextField();
         inputButton = new JButton("Отправить");
 
-
-        // JPanel jpDown
-        jpDown.add(textFieldMessage, BorderLayout.CENTER); // Размещаем поле ввода в центре панели jpDown
-        jpDown.add(inputButton, BorderLayout.EAST); // Размещаем кнопку справа на панели jpDown
-        add(jpDown, BorderLayout.SOUTH); // BorderLayout.SOUTH - привязываем к низу
-        // Устанавливаем отступы для панели jpDown
+        jpDown.add(textFieldMessage, BorderLayout.CENTER);
+        jpDown.add(inputButton, BorderLayout.EAST);
+        add(jpDown, BorderLayout.SOUTH);
         jpDown.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pack();
 
-
-        // JPanel jpUp
         textFieldIp = new JTextField();
         textFieldPort = new JTextField();
         textFieldIp.setPreferredSize(new Dimension(174, 30));
@@ -56,21 +54,18 @@ public class ClientInterface extends JFrame {
         textFieldPassword = new JTextField();
         loginButton = new JButton("Login");
 
-        jpUp = new JPanel(); // Создаем контейнер для размещения двух строк
-        jpUp.setLayout(new BoxLayout(jpUp, BoxLayout.Y_AXIS)); // Используем вертикальное выравнивание
+        jpUp = new JPanel();
+        jpUp.setLayout(new BoxLayout(jpUp, BoxLayout.Y_AXIS));
 
-        // Первая строка с двумя элементами
         JPanel firstRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         firstRow.add(textFieldIp);
         firstRow.add(textFieldPort);
 
-        // Вторая строка с тремя элементами
         JPanel secondRow = new JPanel(new GridLayout(1, 3));
         secondRow.add(textFieldLogin);
         secondRow.add(textFieldPassword);
         secondRow.add(loginButton);
 
-        // Добавляем обе строки в jpUp
         jpUp.add(firstRow);
         jpUp.add(secondRow);
 
@@ -78,13 +73,12 @@ public class ClientInterface extends JFrame {
         jpUp.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pack();
 
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Установка операции закрытия по умолчанию при закрытии окна
-        setSize(WIDTH, HEIGHT); // Установка размеров окна
-        setLocationRelativeTo(null); // Установка положения окна по центру
-        setTitle("Client Interface"); // Установка заголовка окна
-        setResizable(false); // Запрет изменения размера окна
-        setVisible(true); // Установка видимости окна
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(WIDTH, HEIGHT);
+        setLocationRelativeTo(null);
+        setTitle("Client Interface");
+        setResizable(false);
+        setVisible(true);
 
         addListenerOnButton();
     }
@@ -97,7 +91,6 @@ public class ClientInterface extends JFrame {
                     String fullName = "(" + ip + " : " + port + ") " + name + ": ";
                     String text = fullName + textFieldMessage.getText();
 
-                    // Очищаем список storyDialogs перед чтением из файла
                     storyDialogs.clear();
 
                     try {
@@ -109,7 +102,7 @@ public class ClientInterface extends JFrame {
                     storyDialogs.add(text);
                     writeToFile.write(storyDialogs);
 
-                    serverInterface.printMessage(text);
+                    server.printMessage(text);
                     textFieldMessage.setText("");
                 }
             }
@@ -123,7 +116,18 @@ public class ClientInterface extends JFrame {
                 port = textFieldPort.getText();
             }
         });
-
     }
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            ServerInterface server = new ServerInterface();
+
+            ClientInterface client1 = new ClientInterface(server);
+            ClientInterface client2 = new ClientInterface(server);
+
+            client1.setVisible(true);
+            client2.setVisible(true);
+        });
+    }
 }
+
