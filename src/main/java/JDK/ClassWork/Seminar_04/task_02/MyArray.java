@@ -1,4 +1,4 @@
-package JDK.ClassWork.Seminar_04.tast_02;
+package JDK.ClassWork.Seminar_04.task_02;
 
 
 public class MyArray<T> {
@@ -15,7 +15,6 @@ public class MyArray<T> {
     }
 
     public void remove(int index){
-        //РїСЂРѕРІРµСЂРєСѓ РёРЅРґРµРєСЃР°
         for (int i = index + 1; i < size; i++) {
             objects[i - 1] = objects[i];
         }

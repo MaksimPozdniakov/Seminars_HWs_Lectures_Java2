@@ -1,4 +1,4 @@
-package JDK.ClassWork.Seminar_04.tast_01;
+package JDK.ClassWork.Seminar_04.task_01;
 
 import java.util.Arrays;
 
