@@ -1,4 +1,4 @@
-package JDK.ClassWork.Seminar_04.task_02;
+package JDK.ClassWork.Seminar_03.task_02;
 
 public class Person {
     String name;

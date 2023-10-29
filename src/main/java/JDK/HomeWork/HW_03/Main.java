@@ -21,7 +21,7 @@ public class Main {
         // Задание №2
         System.out.println();
         System.out.println("Задание №2");
-        String[] stringArray1 = new String[5];
+        String[] stringArray1 = new String[6];
         String[] stringArray2 = new String[5];
         Integer[] intArray1 = new Integer[5];
         Integer[] intArray2 = new Integer[5];
@@ -36,8 +36,5 @@ public class Main {
         System.out.println("Second = " + pair.getSecond());
         System.out.println("Pair = " + pair);
 
-
     }
-
-
 }

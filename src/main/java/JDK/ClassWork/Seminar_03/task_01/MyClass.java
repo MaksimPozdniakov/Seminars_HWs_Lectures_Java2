@@ -1,4 +1,4 @@
-package JDK.ClassWork.Seminar_04.task_01;
+package JDK.ClassWork.Seminar_03.task_01;
 
 import java.io.DataInput;
 import java.io.InputStream;

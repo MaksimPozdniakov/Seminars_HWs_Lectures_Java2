@@ -19,15 +19,7 @@ public class Calculator {
     }
 
     public static <T> boolean compareArrays(T[] first, T[] second) {
-        int length1 = 0;
-        int length2 = 0;
-        for (int i = 0; i < first.length; i++) {
-            length1 += 1;
-        }
-        for (int i = 0; i < second.length; i++) {
-            length2 += 1;
-        }
-        return length1 == length2;
+        return first.length == second.length;
     }
 
 }
