@@ -13,12 +13,12 @@ public class Philosopher implements Runnable{
     }
 
     public void eat() {
-        System.out.println(id + " Филосов ест");
+        System.out.println((id + 1) + "-й Филосов ест");
         count++;
     }
 
     public void think() {
-        System.out.println(id + " Филосов думает");
+        System.out.println((id + 1) + "-й Филосов думает");
         count++;
     }
 
