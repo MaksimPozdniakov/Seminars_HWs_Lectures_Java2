@@ -9,9 +9,9 @@ public class Program {
 
         List<Employee> employees = Worker.getEmployees(15);
 
-        for (Employee employee: employees) {
-            System.out.println(employee);
-        }
+//        for (Employee employee: employees) {
+//            System.out.println(employee);
+//        }
 
         System.out.println();
         System.out.print("Отсортированный список по зарплате");

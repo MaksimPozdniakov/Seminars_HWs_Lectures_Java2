@@ -28,13 +28,11 @@ public class Main {
         addMethod(employeeDirectory,rnd,phoneNumbers,names,serviceNumbers,workExperience);
         addMethod(employeeDirectory,rnd,phoneNumbers,names,serviceNumbers,workExperience);
 
-
         // for test searchServiceNumber
         employeeDirectory.addNewEmployee(545422,
                 phoneNumbers[rnd.nextInt(phoneNumbers.length)],
                 names[rnd.nextInt(names.length)],
                 workExperience[rnd.nextInt(workExperience.length)]);
-
 
 
         // resultMethods
