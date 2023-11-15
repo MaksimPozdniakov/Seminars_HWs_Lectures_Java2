@@ -13,7 +13,6 @@ public class Map extends JPanel {
     private static final int AI_DOT = 2;
     private static final int EMPTY_DOT = 0;
     private static final int PADDING = 10;
-
     private int gameStateType;
     private static final int STATE_GAME = 0;
     private static final int STATE_WIN_HUMAN = 1;
@@ -71,13 +70,6 @@ public class Map extends JPanel {
         aiTurn();
         repaint();
         checkEndGame(AI_DOT, STATE_WIN_AI);
-    }
-
-    private void testBoard(){
-        for (int i = 0; i < 3; i++) {
-            System.out.println(Arrays.toString(field[i]));
-        }
-        System.out.println();
     }
 
     private boolean isValidCell(int x, int y) {
