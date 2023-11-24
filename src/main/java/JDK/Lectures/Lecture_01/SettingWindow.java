@@ -24,6 +24,7 @@ public class SettingWindow extends JFrame {
     JPanel mainPanel;
 
     SettingWindow(GameWindow gameWindow){
+
         btnStart = new JButton("Start new game");
         mainPanel = new JPanel(new GridLayout(9,1));
         choiceHA = new JLabel("Выберите режим игры");

@@ -18,11 +18,9 @@ public class ClientInterface extends JFrame {
     private static ArrayList<String> storyDialogs = new ArrayList<>();
 
     private WriteToFile writeToFile = new WriteToFile(
-            "C:/Users/PMPav/OneDrive/Рабочий стол/Third block of study/Seminars/Seminars_HWs_Lectures_Java2/src" +
-                    "/main/java/JDK/HomeWork/HW_01/ReadWrite/Log.txt");
+            "src/main/java/JDK/HomeWork/HW_01/ReadWrite/Log.txt");
     private ReadFromFile readFromFile = new ReadFromFile(
-            "C:/Users/PMPav/OneDrive/Рабочий стол/Third block of study/Seminars/Seminars_HWs_Lectures_Java2/src" +
-                    "/main/java/JDK/HomeWork/HW_01/ReadWrite/Log.txt");
+            "src/main/java/JDK/HomeWork/HW_01/ReadWrite/Log.txt");
 
     private JTextField textFieldMessage, textFieldIp, textFieldPort, textFieldLogin, textFieldPassword;
     private JButton inputButton, loginButton;

@@ -17,16 +17,15 @@ public class ClientInterface extends JFrame {
     private static ArrayList<String> storyDialogs = new ArrayList<>();
 
     private WriteToFile writeToFile = new WriteToFile(
-            "C:/Users/PMPav/OneDrive/Рабочий стол/Third block of study/Seminars/Seminars_HWs_Lectures_Java2/src" +
-                    "/main/java/JDK/HomeWork/HW_01/ReadWrite/Log.txt");
+            "C:/Users/PMPav/OneDrive/Рабочий стол/Third block of study/JavaCore.Seminars/Seminars_HWs_Lectures_Java2/src" +
+                    "/main/java/JDK/JavaCore.HomeWork/HW_01/ReadWrite/Log.txt");
     private ReadFromFile readFromFile = new ReadFromFile(
-            "C:/Users/PMPav/OneDrive/Рабочий стол/Third block of study/Seminars/Seminars_HWs_Lectures_Java2/src" +
-                    "/main/java/JDK/HomeWork/HW_01/ReadWrite/Log.txt");
+            "C:/Users/PMPav/OneDrive/Рабочий стол/Third block of study/JavaCore.Seminars/Seminars_HWs_Lectures_Java2/src" +
+                    "/main/java/JDK/JavaCore.HomeWork/HW_01/ReadWrite/Log.txt");
 
     private JTextField textFieldMessage, textFieldIp, textFieldPort, textFieldLogin, textFieldPassword;
     private JButton inputButton, loginButton;
     private JPanel jpDown, jpUp;
-
     private String name;
     private String ip;
     private String port;
@@ -81,7 +80,12 @@ public class ClientInterface extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Установка операции закрытия по умолчанию при закрытии окна
         setSize(WIDTH, HEIGHT); // Установка размеров окна
-        setLocationRelativeTo(null); // Установка положения окна по центру
+
+        // установить размеры и положение окна с левым верхним углом в координатах (100, 100) и размерами 400x300 пикселей
+        // setBounds(100, 100, 400, 300);
+
+        setLocation(100, 100); // установить расположение окна по координатам (100, 100)
+        // setLocationRelativeTo(null); // Установка положения окна по центру
         setTitle("Client Interface"); // Установка заголовка окна
         setResizable(false); // Запрет изменения размера окна
         setVisible(true); // Установка видимости окна

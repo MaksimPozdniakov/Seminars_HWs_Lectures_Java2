@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: Seminars.Seminar_01.sample.Main
+Main-Class: JavaCore.Seminars.Seminar_01.sample.Main
 

@@ -35,6 +35,7 @@ public class GameWindow extends JFrame {
         btnStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                settingWindow.setLocationRelativeTo(GameWindow.this);
                 settingWindow.setVisible(true);
             }
         });
@@ -42,10 +43,9 @@ public class GameWindow extends JFrame {
         JPanel panBottom = new JPanel(new GridLayout(1, 2));
         panBottom.add(btnStart);
         panBottom.add(btnExit);
-
+        //setLocation(100, 100);
         add(panBottom, BorderLayout.SOUTH);
         add(map);
-
         setVisible(true);
     }
 

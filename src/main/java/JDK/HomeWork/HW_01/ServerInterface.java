@@ -19,8 +19,8 @@ public class ServerInterface extends JFrame {
     private static ArrayList<String> storyDialogs = new ArrayList<>();
 
     private ReadFromFile readFromFile = new ReadFromFile(
-            "C:/Users/PMPav/OneDrive/Рабочий стол/Third block of study/Seminars/Seminars_HWs_Lectures_Java2/src" +
-                    "/main/java/JDK/HomeWork/HW_01/ReadWrite/Log.txt");
+            "C:/Users/PMPav/OneDrive/Рабочий стол/Third block of study/JavaCore.Seminars/Seminars_HWs_Lectures_Java2/src" +
+                    "/main/java/JDK/JavaCore.HomeWork/HW_01/ReadWrite/Log.txt");
 
     public ServerInterface() {
         jTextArea = new JTextArea();

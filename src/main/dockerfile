@@ -1,5 +1,5 @@
 FROM bellsoft/liberica-openjdk-alpine
 COPY ./java ./src
 RUN mkdir ./out
-RUN javac -sourcepath ./src -d out src/HomeWork/HW_01/program/Main.java
-CMD java -classpath ./out HomeWork.HW_01.program.Main
+RUN javac -sourcepath ./src -d out src/JavaCore.HomeWork/HW_01/program/Main.java
+CMD java -classpath ./out JavaCore.HomeWork.HW_01.program.Main
