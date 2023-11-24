@@ -3,7 +3,7 @@ package JavaJunior.Seminars.Sm_01_Lambda_StreamAPI.task2;
 /**
  * Еда
  */
-public interface Food extends Thing{
+public interface Food extends Thing {
 
     /**
      * Получить наличие протеинов в еде

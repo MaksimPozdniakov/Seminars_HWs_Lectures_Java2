@@ -96,6 +96,7 @@ public class Program {
         Cart<T> cart = new Cart<>(clazz, market);
         while (true)
         {
+            System.out.println();
             System.out.println("Список доступных товаров:");
             System.out.println("[0] Завершение формирования корзины + балансировка");
             market.printThings(clazz);
@@ -106,6 +107,7 @@ public class Program {
                 scanner.nextLine();
                 if (no == 0) {
                     cart.cardBalancing();
+                    System.out.println();
                     System.out.println("Ваша корзина содержит продукты:");
                     cart.printFoodstuffs();
                     return;
@@ -117,6 +119,7 @@ public class Program {
                     }
                     cart.getFoodstuffs().add(thing);
                     System.out.println("Товар успешно добавлен в корзину.");
+                    System.out.println();
                     System.out.println("Ваша корзина содержит продукты:");
                     cart.printFoodstuffs();
                 }
