@@ -1,17 +1,17 @@
-package JavaJunior.Seminars.Sm_01.task2;
+package JavaJunior.Seminars.Sm_01_Lambda_StreamAPI.task2;
 
 /**
- * Чебурек
+ * Сыр Балыковый (Балык)
  */
-public class Cheburek implements SemiFinishedFood{
+public class BalykCheese implements Snack {
     @Override
     public boolean getProteins() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean getFats() {
-        return true;
+        return false;
     }
 
     @Override
@@ -21,8 +21,6 @@ public class Cheburek implements SemiFinishedFood{
 
     @Override
     public String getName() {
-        return "Чебурек";
+        return "Сыр (Балык)";
     }
-
-
 }

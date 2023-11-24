@@ -1,4 +1,4 @@
-package JavaJunior.Seminars.Sm_01.task1;
+package JavaJunior.Seminars.Sm_01_Lambda_StreamAPI.task1;
 
 
     /*

@@ -1,9 +1,9 @@
-package JavaJunior.Seminars.Sm_01.task2;
+package JavaJunior.Seminars.Sm_01_Lambda_StreamAPI.task2;
 
 /**
- * Чипсы
+ * Чебурек
  */
-public class Crisps implements Snack{
+public class Cheburek implements SemiFinishedFood{
     @Override
     public boolean getProteins() {
         return false;
@@ -21,6 +21,8 @@ public class Crisps implements Snack{
 
     @Override
     public String getName() {
-        return "Чипсы";
+        return "Чебурек";
     }
+
+
 }

@@ -1,8 +1,7 @@
-package JavaJunior.Seminars.Sm_01.task1;
+package JavaJunior.Seminars.Sm_01_Lambda_StreamAPI.task1;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LibraryV2 {
 

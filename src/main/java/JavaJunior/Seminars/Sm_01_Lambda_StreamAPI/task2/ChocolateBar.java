@@ -1,12 +1,12 @@
-package JavaJunior.Seminars.Sm_01.task2;
+package JavaJunior.Seminars.Sm_01_Lambda_StreamAPI.task2;
 
 /**
- * Курица
+ * Шоколадный батончик
  */
-public class Chicken implements HealthyFood{
+public class ChocolateBar implements Snack{
     @Override
     public boolean getProteins() {
-        return true;
+        return false;
     }
 
     @Override
@@ -16,12 +16,11 @@ public class Chicken implements HealthyFood{
 
     @Override
     public boolean getCarbohydrates() {
-        return false;
+        return true;
     }
 
     @Override
     public String getName() {
-        return "Курица";
+        return "Шоколадный батончик";
     }
 }
-

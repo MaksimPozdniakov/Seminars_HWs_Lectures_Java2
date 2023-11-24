@@ -1,9 +1,9 @@
-package JavaJunior.Seminars.Sm_01.task2;
+package JavaJunior.Seminars.Sm_01_Lambda_StreamAPI.task2;
 
 /**
- * Фрукт
+ * Замороженные ягоды
  */
-public class Fruit implements HealthyFood{
+public class DumplingsBerries implements SemiFinishedFood{
     @Override
     public boolean getProteins() {
         return false;
@@ -21,7 +21,6 @@ public class Fruit implements HealthyFood{
 
     @Override
     public String getName() {
-        return "Фрукт";
+        return "Замороженные ягоды";
     }
 }
-

@@ -1,9 +1,9 @@
-package JavaJunior.Seminars.Sm_01.task2;
+package JavaJunior.Seminars.Sm_01_Lambda_StreamAPI.task2;
 
 /**
- * Сыр Балыковый (Балык)
+ * Курица
  */
-public class BalykCheese implements Snack {
+public class Chicken implements HealthyFood{
     @Override
     public boolean getProteins() {
         return true;
@@ -21,6 +21,7 @@ public class BalykCheese implements Snack {
 
     @Override
     public String getName() {
-        return "Сыр (Балык)";
+        return "Курица";
     }
 }
+
