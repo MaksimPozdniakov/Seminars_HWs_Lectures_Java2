@@ -49,27 +49,6 @@ public class QueryBuilder {
         }
     }
 
-    public String buildSelectQuery(Class<?> clazz, UUID primaryKey){
-        StringBuilder query = new StringBuilder("SELECT * FROM ");
-
-        if (clazz.isAnnotationPresent(Table.class)) {
-            Table tableAnnotation = clazz.getAnnotation(Table.class);
-            query.append(tableAnnotation.name()).append(" WHERE ");
-        }
-
-        Field[] fields = clazz.getDeclaredFields();
-        for (Field field : fields) {
-            if (field.isAnnotationPresent(Column.class)) {
-                Column columnAnnotation = field.getAnnotation(Column.class);
-                if (columnAnnotation.primaryKey()) {
-                    query.append(columnAnnotation.name()).append(" = ").append(primaryKey);
-                    break;
-                }
-            }
-        }
-        return query.toString();
-    }
-
     public String buildUpdateQuery(Object obj) throws IllegalAccessException {
         Class<?> clazz = obj.getClass();
         StringBuilder query = new StringBuilder("UPDATE ");
@@ -113,6 +92,27 @@ public class QueryBuilder {
         }
     }
 
+    public String buildSelectQuery(Class<?> clazz, UUID primaryKey){
+        StringBuilder query = new StringBuilder("SELECT * FROM ");
+
+        if (clazz.isAnnotationPresent(Table.class)) {
+            Table tableAnnotation = clazz.getAnnotation(Table.class);
+            query.append(tableAnnotation.name()).append(" WHERE ");
+        }
+
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            if (field.isAnnotationPresent(Column.class)) { // проверяет, содержит ли элемент (например, класс, метод, поле) указанную аннотацию.
+                Column columnAnnotation = field.getAnnotation(Column.class);
+                if (columnAnnotation.primaryKey()) {
+                    query.append(columnAnnotation.name()).append(" = ").append(primaryKey);
+                    break;
+                }
+            }
+        }
+        return query.toString();
+    }
+
     /**
      * TODO: Доработать в рамках домашней работы
      * @param clazz
@@ -120,7 +120,22 @@ public class QueryBuilder {
      * @return
      */
     public String buildDeleteQuery(Class<?> clazz, UUID primaryKey){
-        return null;
-    }
 
+        StringBuilder query = new StringBuilder("DELETE FROM ");
+        if (clazz.isAnnotationPresent(Table.class)) {
+            Table tableAnnotation = clazz.getAnnotation(Table.class);
+            query.append(tableAnnotation.name()).append(" WHERE ");
+        }
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field: fields) {
+            if (field.isAnnotationPresent(Column.class)) {
+                Column columnAnnotation = field.getAnnotation(Column.class);
+                if (columnAnnotation.primaryKey()) {
+                    query.append(columnAnnotation.name()).append(" = ").append(primaryKey);
+                    break;
+                }
+            }
+        }
+        return query.toString();
+    }
 }
