@@ -11,25 +11,25 @@ public class showTree {
         // printTree(new File("src"), "", true);
 
         File sourceDir = new File("src");
-        File backupDir = new File("./backup3");
+        File backupDir = new File("./backup");
 
         if (!backupDir.exists()) {
             backupDir.mkdir();
         }
 
-        backup(sourceDir, backupDir);
-
+        ScanAndCloneDir(sourceDir,backupDir);
 
     }
 
     public static void printTree(File file, String indent, boolean isLast) {
         System.out.print(indent);
+
         if (isLast) {
-            System.out.print("|__");
+            System.out.print("└─");
             indent += "   ";
         } else {
-            System.out.print("|--");
-            indent += "|  ";
+            System.out.print("├─");
+            indent += "|   ";
         }
         System.out.println(file.getName());
 
@@ -39,48 +39,50 @@ public class showTree {
             return;
         }
 
-        int subDirCount = 0;
+        int totalDir = 0;
         for (int i = 0; i < files.length; i++) {
-            subDirCount++;
+            totalDir++;
         }
 
-        int subDirTotal = 0;
+        int countDir = 0;
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory()) {
-                subDirTotal++;
-                printTree(files[i], indent, subDirCount == subDirTotal);
+                countDir++;
+                printTree(files[i], indent, countDir == totalDir);
             } else {
-                printTree(files[i], indent, subDirCount == subDirTotal);
+                if (files[i].isFile()) {
+                    printTree(files[i], indent, countDir == totalDir);
+                }
             }
         }
 
     }
 
-    public static void backup(File sourceDir, File backupDir) {
+    public static void ScanAndCloneDir(File sourceDir, File backupDir) {
         File[] files = sourceDir.listFiles();
-
         if (files != null) {
             for (int i = 0; i < files.length; i++) {
                 if (files[i].isDirectory()) {
                     File newDir = new File(backupDir, files[i].getName());
                     newDir.mkdir();
-                    backup(files[i], newDir);
+                    ScanAndCloneDir(files[i], newDir);
                 } else {
-                    File newFile = new File(backupDir, files[i].getName());
-                    try {
-                        copy(files[i], newFile);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if (files[i].isFile()) {
+                        File newFile = new File(backupDir, files[i].getName());
+                        try {
+                            copyFiles(files[i], newFile);
+                        } catch (IOException e) {
+                            e.fillInStackTrace();
+                        }
                     }
                 }
             }
         }
     }
 
-    private static void copy(File backupDir, File newFile) throws IOException {
-        Path sourse = backupDir.toPath();
-        Path newDir = newFile.toPath();
-        Files.copy(sourse, newDir, StandardCopyOption.REPLACE_EXISTING);
+    private static void copyFiles(File source, File dest) throws IOException {
+        Path sourcePath = source.toPath();
+        Path destPath = dest.toPath();
+        Files.copy(sourcePath, destPath, StandardCopyOption.REPLACE_EXISTING);
     }
-
 }
