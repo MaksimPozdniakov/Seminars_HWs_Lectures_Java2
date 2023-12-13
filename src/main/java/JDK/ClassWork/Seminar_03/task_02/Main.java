@@ -9,7 +9,7 @@ public class Main {
 //        array.add("4");
 //        array.add("5");
 //        System.out.println(array);
-//
+
 //        array.remove(1);
 //        System.out.println(array);
 
@@ -20,7 +20,7 @@ public class Main {
 //        myArray.add(4);
 //        myArray.add(5);
 //        System.out.println(myArray);
-//
+
 //        myArray.remove(1);
 //        System.out.println(myArray);
         MyArray<Person> myArray = new MyArray<>();

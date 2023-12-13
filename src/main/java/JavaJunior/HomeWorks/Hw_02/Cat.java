@@ -2,7 +2,9 @@ package JavaJunior.HomeWorks.Hw_02;
 
 public class Cat extends Animal {
 
-    private final String color;
+    private String color;
+
+    public Cat(){}
 
     public Cat(String name, int age, String color) {
         super(name, age);

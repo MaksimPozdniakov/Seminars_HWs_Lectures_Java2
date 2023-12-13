@@ -17,6 +17,6 @@ public class Friend {
     }
 
     private synchronized void bowBack(Friend friend){
-        System.out.println(name + ": кланиемся в ответ " + friend.getName());
+        System.out.println(name + ": кланяемся в ответ " + friend.getName());
     }
 }
