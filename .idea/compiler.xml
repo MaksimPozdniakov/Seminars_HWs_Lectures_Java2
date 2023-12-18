@@ -7,7 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Seminars_HWs_Lectures_Java2" />
+        <module name="java2" />
       </profile>
     </annotationProcessing>
   </component>
