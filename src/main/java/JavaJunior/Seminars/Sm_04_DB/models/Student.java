@@ -35,7 +35,9 @@ public class Student {
 
     // Для создания нового студента используем фабричный метод
     public static Student create(){
-        return new Student(names[random.nextInt(names.length)], random.nextInt(20, 26));
+        return new Student(
+                names[random.nextInt(names.length)],
+                random.nextInt(20, 26));
     }
 
     public void updateAge(){

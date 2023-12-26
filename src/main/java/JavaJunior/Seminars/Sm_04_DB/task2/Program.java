@@ -20,7 +20,7 @@ public class Program
 
     public static void main(String[] args) {
         try(SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
+                .configure("hibernate1.cfg.xml")
                 .addAnnotatedClass(Student.class)
                 .buildSessionFactory()){
 
@@ -47,8 +47,8 @@ public class Program
             System.out.println("Object student update successfully");
 
 
-            session.delete(retrievedStudent);
-            System.out.println("Object student delete successfully");
+//            session.delete(retrievedStudent);
+//            System.out.println("Object student delete successfully");
 
 
             session.getTransaction().commit();
