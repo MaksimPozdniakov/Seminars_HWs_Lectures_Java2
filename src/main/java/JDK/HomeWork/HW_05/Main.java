@@ -2,7 +2,7 @@ package JDK.HomeWork.HW_05;
 
 public class Main {
     public static void main(String[] args) {
-        int quantity = 50000;
+        int quantity = 5;
         Philosopher[] philosophers = new Philosopher[quantity];
         Fork[] forks = new Fork[quantity];
 

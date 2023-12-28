@@ -42,16 +42,17 @@ public class Philosopher extends Thread {
         if (table.tryGetForks(leftFork, rightFork)) {
             System.out.println(name + " уплетает вермишель, используя вилки: " + leftFork
                     + " и " + rightFork);
-            sleep(random.nextLong(3000, 6000));
+//            sleep(random.nextLong(3000, 6000));
+            sleep(random.nextLong(300, 600));
             table.putForks(leftFork, rightFork);
             System.out.println(name + " покушал, можно и помыслить. " +
                     "Не забыв при этом вернуть вилки " + leftFork + " и " + rightFork);
             countEat++;
         }
-
     }
 
     private void thinking() throws InterruptedException {
-        sleep(random.nextLong(100, 2000));
+//        sleep(random.nextLong(100, 2000));
+        sleep(random.nextLong(300, 600));
     }
 }
