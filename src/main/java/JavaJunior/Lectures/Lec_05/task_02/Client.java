@@ -1,4 +1,4 @@
-package JavaJunior.Lectures.Lec_03.task_02;
+package main.java.JavaJunior.Lectures.Lec_05.task_02;
 
 import java.io.*;
 import java.net.Socket;
