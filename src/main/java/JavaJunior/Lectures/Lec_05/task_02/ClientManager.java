@@ -24,6 +24,12 @@ public class ClientManager implements Runnable {
         }
     }
 
+    // region Personal message
+
+
+
+    // end region
+
     private void broadCastMessage(String messageToSend) {
         for (ClientManager client: clients) {
             try {

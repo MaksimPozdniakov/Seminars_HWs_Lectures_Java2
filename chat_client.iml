@@ -2,7 +2,10 @@
 <module version="4">
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$/chat_client" dumb="true">
-      <sourceFolder url="file://$MODULE_DIR$/chat_client/src/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chat_client/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chat_client/src55" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chat_client/src55/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chat_client/srcss" isTestSource="false" />
     </content>
   </component>
 </module>
