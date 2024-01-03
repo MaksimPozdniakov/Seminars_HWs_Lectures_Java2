@@ -1,4 +1,4 @@
-package JavaJunior.Lectures.Lec_03.task_02;
+package main.java.JavaJunior.Lectures.Lec_05.task_02;
 
 import java.io.*;
 import java.net.Socket;
@@ -23,6 +23,12 @@ public class ClientManager implements Runnable {
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
     }
+
+    // region Personal message
+
+
+
+    // end region
 
     private void broadCastMessage(String messageToSend) {
         for (ClientManager client: clients) {
