@@ -26,7 +26,61 @@ public class ClientManager implements Runnable {
 
     // region Personal message
 
+    private void handlePersonalMessage(String message) {
+        String[] parts = message.split(" ", 2); // Разделяем сообщение на две части по первому пробелу
+        if (parts.length > 1) {
+            String recipient = parts[0].substring(1); // Извлекаем имя получателя без символа '@'
+            String personalMessage = parts[1]; // Сообщение без имени получателя
 
+            // Ищем получателя среди клиентов
+            for (ClientManager client : clients) {
+                if (client.name.equals(recipient)) {
+                    try {
+                        // Отправляем личное сообщение только выбранному получателю
+                        client.bufferedWriter.write(name + ": " + personalMessage);
+                        client.bufferedWriter.newLine();
+                        client.bufferedWriter.flush();
+                        break;
+                    } catch (IOException e) {
+                        closeEverything(socket, bufferedReader, bufferedWriter);
+                    }
+                }
+            }
+        }
+    }
+
+    // Данный метод нужен, чтобы убрать начало сообщения, до @
+    private String messageWithoutName(String messageFromClient) {
+        String[] message = messageFromClient.split(":");
+        return message[1];
+    }
+
+    @Override
+    public void run() {
+        String messageFromClient;
+
+        while (socket.isConnected()) {
+            try {
+                messageFromClient = bufferedReader.readLine();
+                // System.out.println(messageWithoutName(messageFromClient));
+
+                if (messageWithoutName(messageFromClient).startsWith("@")) {
+
+                    handlePersonalMessage(messageWithoutName(messageFromClient)); // Обработка личного сообщения
+                    // System.out.println("Знак имеется!");
+
+                } else {
+
+                    broadCastMessage(messageFromClient); // Рассылка обычного сообщения всем клиентам
+                    // System.out.println("Знак отсутствует!");
+
+                }
+            } catch (IOException e) {
+                closeEverything(socket, bufferedReader, bufferedWriter);
+                break;
+            }
+        }
+    }
 
     // end region
 
@@ -68,19 +122,4 @@ public class ClientManager implements Runnable {
         broadCastMessage("SERVER: " + name + " покинул чат.");
     }
 
-
-    @Override
-    public void run() {
-        String messageFromClient;
-
-        while (socket.isConnected()) {
-            try {
-                messageFromClient = bufferedReader.readLine();
-                broadCastMessage(messageFromClient);
-            } catch (IOException e) {
-                closeEverything(socket, bufferedReader, bufferedWriter);
-                break;
-            }
-        }
-    }
 }

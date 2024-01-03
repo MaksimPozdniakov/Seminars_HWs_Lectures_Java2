@@ -4,13 +4,13 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Client2 {
+public class Client4 {
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String name;
 
-    public Client2(Socket socket, String userName) {
+    public Client4(Socket socket, String userName) {
         this.socket = socket;
         this.name = userName;
         try {
@@ -79,7 +79,7 @@ public class Client2 {
         System.out.print("Введите свое имя: ");
         String name = scanner.nextLine();
         Socket socket = new Socket("localhost", 1300);
-        Client2 client = new Client2(socket, name);
+        Client4 client = new Client4(socket, name);
         client.listenerForMessage();
         client.sendMessage();
     }
