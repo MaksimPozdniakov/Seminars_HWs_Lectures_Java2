@@ -30,7 +30,7 @@ public class Client3 {
             Scanner scanner = new Scanner(System.in);
             while (socket.isConnected()) {
                 String message = scanner.nextLine();
-                bufferedWriter.write(name + ": " + message);
+                bufferedWriter.write(name + ":" + message);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
@@ -76,7 +76,7 @@ public class Client3 {
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите свое имя: ");
+        System.out.print("Введите свое имя: ");
         String name = scanner.nextLine();
         Socket socket = new Socket("localhost", 1300);
         Client3 client = new Client3(socket, name);
